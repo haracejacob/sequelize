@@ -87,6 +87,8 @@ if (dialect.match(/^postgres/)) {
         // test suite causing a failure of afterEach's cleanup to be called.
         return this.queryInterface.dropFunction('create_job', [{ type: 'varchar', name: 'test' }])
           // suppress errors here. if create_job doesn't exist thats ok.
+          .reflect()
+          .then(() => this.queryInterface.dropFunction('add_one', []))
           .reflect();
       });
 
@@ -94,6 +96,8 @@ if (dialect.match(/^postgres/)) {
         // cleanup
         return this.queryInterface.dropFunction('create_job', [{ type: 'varchar', name: 'test' }])
           // suppress errors here. if create_job doesn't exist thats ok.
+          .reflect()
+          .then(() => this.queryInterface.dropFunction('add_one', []))
           .reflect();
       });
 
